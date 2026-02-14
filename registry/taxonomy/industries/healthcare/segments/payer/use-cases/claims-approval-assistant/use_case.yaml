@@ -1,0 +1,31 @@
+id: claims-approval-assistant
+name: Claims Approval & Denial Assistant
+description: LLM assists claims staff with adjudication support and rationale generation.
+tags: [llm, decision_support, healthcare, payer, phi, pii, rag]
+scope_questions:
+  - id: materially_influences_decisions
+    prompt: Does it materially influence approval/denial decisions?
+    type: boolean
+    default: true
+  - id: processes_phi
+    prompt: Does the system process PHI?
+    type: boolean
+    default: true
+  - id: uses_tools
+    prompt: Does it call external tools/APIs (plugins, functions, agents)?
+    type: boolean
+    default: false
+  - id: internet_exposed
+    prompt: Is it internet-exposed (publicly reachable)?
+    type: boolean
+    default: false
+  - id: jurisdictions
+    prompt: Which jurisdictions apply?
+    type: multiselect
+    options: [US, EU, UK, CA, SG]
+    default: [US]
+  - id: model_sourcing
+    prompt: Model sourcing
+    type: select
+    options: [api, open_source, fine_tuned, proprietary]
+    default: api

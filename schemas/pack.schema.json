@@ -1,0 +1,4 @@
+{
+  "deprecated": true,
+  "use": "pack_manifest.schema.json + controls.schema.json"
+}

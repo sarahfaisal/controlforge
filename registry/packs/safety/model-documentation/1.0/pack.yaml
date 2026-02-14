@@ -1,0 +1,12 @@
+pack:
+  id: model-documentation
+  name: Model + Data + System Documentation Pack
+  version: "1.0"
+  domain: safety
+  type: control_catalog
+  description: >
+    Documentation-first safety pack: model/system cards, dataset sheets, intended use,
+    limitations, monitoring and incident procedures.
+  source:
+    name: Community
+    reference: Documentation best practices for AI systems (model/system/dataset docs)

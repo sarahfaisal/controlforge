@@ -1,0 +1,9 @@
+[project]
+name = "truststack-grc"
+version = "0.1.0"
+description = "TrustStack AI GRC Workbench (config-driven packs -> controls -> evidence -> audit-ready)"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

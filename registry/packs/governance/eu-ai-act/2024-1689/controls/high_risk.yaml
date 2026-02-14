@@ -1,0 +1,15 @@
+controls:
+  - id: EU-HR-01
+    canonical_id: CTRL-GOV-0100
+    title: Classify AI system risk level and role (provider/deployer)
+    severity: high
+    category: EU AI Act - Scoping
+    objective: Determine whether the system is prohibited, high-risk, subject to transparency obligations, or minimal risk.
+    applicability:
+      any:
+        - in: [EU, jurisdiction.list]
+    evidence_required:
+      - type: record
+        name: EU AI Act scoping memo (risk level + role)
+    test_procedures:
+      - Verify documented classification and rationale, including system intended use.

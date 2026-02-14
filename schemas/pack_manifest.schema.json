@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://truststack.ai/schemas/pack_manifest.json",
+  "type": "object",
+  "required": [
+    "pack"
+  ],
+  "properties": {
+    "pack": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "domain",
+        "type",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9\\-]*$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "security",
+            "safety",
+            "governance"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "control_catalog",
+            "threat_catalog",
+            "suggestion_catalog"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "license_hint": {
+          "type": "string"
+        },
+        "source": {
+          "type": "object",
+          "required": [
+            "name",
+            "reference"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "reference": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

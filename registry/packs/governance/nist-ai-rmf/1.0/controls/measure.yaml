@@ -1,0 +1,18 @@
+controls:
+  - id: MEASURE01
+    canonical_id: CTRL-GOV-0002
+    title: Maintain evaluation plan for performance, robustness, and safety
+    severity: high
+    category: MEASURE
+    objective: Define and run evaluations appropriate to the use case risk profile.
+    applicability:
+      any:
+        - exists: system.name
+    evidence_required:
+      - type: plan
+        name: Evaluation plan (metrics, datasets, thresholds)
+      - type: test_report
+        name: Evaluation results & sign-off
+    test_procedures:
+      - Confirm evaluation covers relevant harms (e.g., bias, hallucination, robustness).
+      - Confirm thresholds and go/no-go criteria are defined.

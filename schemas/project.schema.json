@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://truststack.ai/schemas/project.json",
+  "type": "object",
+  "required": [
+    "project",
+    "inputs",
+    "context",
+    "generated"
+  ],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "created_at"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "required": [
+        "industry_id",
+        "segment_id",
+        "use_case_id",
+        "selected_packs"
+      ],
+      "properties": {
+        "industry_id": {
+          "type": "string"
+        },
+        "segment_id": {
+          "type": "string"
+        },
+        "use_case_id": {
+          "type": "string"
+        },
+        "selected_packs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "domain",
+              "pack_id",
+              "version"
+            ],
+            "properties": {
+              "domain": {
+                "type": "string"
+              },
+              "pack_id": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "scope_answers": {
+          "type": "object"
+        }
+      }
+    },
+    "context": {
+      "type": "object"
+    },
+    "generated": {
+      "type": "object",
+      "required": [
+        "generator_version",
+        "taxonomy_hash",
+        "packs_hash",
+        "checklist_hash"
+      ],
+      "properties": {
+        "generator_version": {
+          "type": "string"
+        },
+        "taxonomy_hash": {
+          "type": "string"
+        },
+        "packs_hash": {
+          "type": "string"
+        },
+        "checklist_hash": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

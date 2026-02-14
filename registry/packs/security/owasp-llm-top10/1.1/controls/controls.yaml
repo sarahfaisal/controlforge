@@ -1,0 +1,104 @@
+controls:
+  - id: LLM01
+    canonical_id: CTRL-SEC-0001
+    title: Prompt injection defenses
+    severity: high
+    category: Input & instruction integrity
+    objective: Prevent untrusted inputs from overriding system instructions or tool policies.
+    applicability:
+      any:
+        - has_tag: llm
+    why: Most LLM applications accept untrusted input that can manipulate behavior or tool use.
+    evidence_required:
+      - type: design_doc
+        name: Prompt boundary design + threat model
+      - type: test_report
+        name: Prompt injection evaluation results
+    test_procedures:
+      - Run a prompt-injection test suite against representative prompts.
+      - Verify system message isolation and tool-call allowlisting.
+    references:
+      - name: OWASP
+        ref: LLM01 (Prompt Injection)
+        url: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    suggestions:
+      - type: pattern
+        id: pattern.prompt_boundaries
+      - type: pattern
+        id: pattern.tool_allowlist
+
+  - id: LLM02
+    canonical_id: CTRL-SEC-0002
+    title: Training data / RAG data poisoning protections
+    severity: high
+    category: Data integrity
+    objective: Reduce risk of poisoning in training data, embeddings, and retrieval corpora.
+    applicability:
+      any:
+        - has_tag: rag
+        - has_tag: fine_tuned
+    evidence_required:
+      - type: procedure
+        name: Data curation + provenance procedure
+      - type: test_report
+        name: RAG corpus integrity checks / sampling results
+    test_procedures:
+      - Validate ingestion pipeline has provenance, access controls, and change review.
+      - Spot-check retrieval corpus for malicious or policy-violating content.
+    references:
+      - name: OWASP
+        ref: LLM02 (Data Poisoning)
+        url: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    suggestions:
+      - type: pattern
+        id: pattern.rag_provenance
+
+  - id: LLM06
+    canonical_id: CTRL-SEC-0006
+    title: Sensitive data exposure controls (PII/PHI)
+    severity: critical
+    category: Data protection
+    objective: Prevent the model from disclosing sensitive data in prompts, logs, and outputs.
+    applicability:
+      any:
+        - equals: [data.pii, true]
+        - equals: [data.phi, true]
+    evidence_required:
+      - type: policy
+        name: Data handling & logging policy for LLM apps
+      - type: config
+        name: Redaction/filters configuration
+    test_procedures:
+      - Verify PII/PHI redaction in prompts, outputs, and logs.
+      - Validate access controls for traces and conversation logs.
+    references:
+      - name: OWASP
+        ref: LLM06 (Sensitive Information Disclosure)
+        url: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    suggestions:
+      - type: pattern
+        id: pattern.pii_phi_redaction
+
+  - id: LLM08
+    canonical_id: CTRL-SEC-0008
+    title: Supply chain assurance for models and dependencies
+    severity: medium
+    category: Supply chain
+    objective: Manage risks from third-party models, plugins, and dependency chains.
+    applicability:
+      any:
+        - equals: [model.sourcing, api]
+        - equals: [model.sourcing, open_source]
+    evidence_required:
+      - type: inventory
+        name: Model/dependency inventory + SBOM
+    test_procedures:
+      - Track model provenance and dependency versions.
+      - Validate vendor/API contractual and security assurances where applicable.
+    references:
+      - name: OWASP
+        ref: LLM08 (Supply Chain Vulnerabilities)
+        url: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    suggestions:
+      - type: pattern
+        id: pattern.sbom_and_provenance

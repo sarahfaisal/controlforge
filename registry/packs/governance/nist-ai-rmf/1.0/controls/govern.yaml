@@ -1,0 +1,17 @@
+controls:
+  - id: GOV01
+    canonical_id: CTRL-GOV-0001
+    title: Define AI roles, responsibilities, and approval gates
+    severity: high
+    category: GOVERN
+    objective: Establish ownership, decision rights, and escalation for the AI system lifecycle.
+    applicability:
+      any:
+        - exists: system.name
+    evidence_required:
+      - type: policy
+        name: AI governance policy / RACI
+      - type: record
+        name: Approval gates definition (design → launch → change)
+    test_procedures:
+      - Verify named owners exist for model, data, security, and risk decisions.

@@ -1,0 +1,22 @@
+id: fraud-detection
+name: Fraud Detection (Decision Support)
+description: ML/AI system flags potentially fraudulent transactions for analyst review.
+tags: [ml, classifier, decision_support, finance, pii]
+scope_questions:
+  - id: materially_influences_decisions
+    prompt: Does it materially influence blocking/approving transactions?
+    type: boolean
+    default: true
+  - id: processes_pci
+    prompt: Does it process PCI/payment card data?
+    type: boolean
+    default: true
+  - id: customer_facing
+    prompt: Is the system customer-facing?
+    type: boolean
+    default: false
+  - id: jurisdictions
+    prompt: Which jurisdictions apply?
+    type: multiselect
+    options: [US, EU, UK, CA, SG]
+    default: [US]

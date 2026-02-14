@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    environment:
+      - TRUSTSTACK_CONFIG_ROOT=/app/registry
+      - TRUSTSTACK_WORKSPACE_ROOT=/app/workspaces
+    volumes:
+      - ./registry:/app/registry:ro
+      - ./schemas:/app/schemas:ro
+      - ./workspaces:/app/workspaces
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_API_BASE=http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api

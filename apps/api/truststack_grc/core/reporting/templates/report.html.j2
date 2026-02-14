@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TrustStack AI GRC Report — {{ project["project"]["name"] }}</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 32px; color: #111; }
+    h1,h2 { margin: 0 0 12px; }
+    .meta { margin: 12px 0 24px; color: #444; }
+    .pill { display:inline-block; padding: 2px 10px; border-radius: 999px; background:#f3f4f6; font-size: 12px; margin-right: 6px;}
+    table { width:100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align:left; border-bottom: 1px solid #e5e7eb; padding: 10px 8px; vertical-align: top; }
+    th { background:#fafafa; position: sticky; top: 0; }
+    .sev-critical { font-weight: 700; color:#7f1d1d; }
+    .sev-high { font-weight: 600; color:#7c2d12; }
+    .sev-medium { color:#1f2937; }
+    .sev-low { color:#374151; }
+    .muted { color:#6b7280; font-size: 12px; }
+    .pre { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>TrustStack AI GRC — Audit Report</h1>
+  <div class="meta">
+    <div><span class="pill">Project</span> <strong>{{ project["project"]["name"] }}</strong></div>
+    <div class="muted">
+      Project ID: {{ project["project"]["id"] }} • Generated: {{ checklist["generated_at"] }} • Generator: {{ project["generated"]["generator_version"] }}
+    </div>
+    <div class="muted">
+      Use case: {{ project["inputs"]["use_case_id"] }} • Industry: {{ project["inputs"]["industry_id"] }} • Segment: {{ project["inputs"]["segment_id"] }}
+    </div>
+  </div>
+
+  <h2>Summary</h2>
+  <div class="meta">
+    <span class="pill">Total controls: {{ checklist["counts"]["total"] }}</span>
+    {% for d, n in checklist["counts"]["by_domain"].items() %}
+      <span class="pill">{{ d }}: {{ n }}</span>
+    {% endfor %}
+  </div>
+
+  <h2>Checklist</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 14%;">Domain</th>
+        <th style="width: 12%;">Severity</th>
+        <th style="width: 16%;">Status</th>
+        <th>Control</th>
+        <th style="width: 18%;">Evidence</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in checklist["items"] %}
+      <tr>
+        <td>{{ item["domain"] }}</td>
+        <td class="sev-{{ item["severity"] }}">{{ item["severity"] }}</td>
+        <td>{{ item["status"] }}</td>
+        <td>
+          <div><strong>{{ item["title"] }}</strong></div>
+          <div class="muted">{{ item["objective"] }}</div>
+          <div class="muted">Refs: {% for r in item["pack_refs"] %}{{ r["pack_id"] }}@{{ r["version"] }}:{{ r["control_id"] }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
+          {% if item.get("why_applies") %}
+          <div class="pre muted">{{ item["why_applies"] }}</div>
+          {% endif %}
+        </td>
+        <td>
+          {% if item.get("evidence") and item["evidence"]|length > 0 %}
+            <div class="muted">{{ item["evidence"]|length }} file(s)</div>
+            <ul class="muted">
+              {% for ev in item["evidence"] %}
+                <li>{{ ev["file_name"] }} (sha256={{ ev["sha256"][:10] }}…)</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <span class="muted">No evidence uploaded</span>
+          {% endif %}
+          {% if item.get("evidence_required") and item["evidence_required"]|length > 0 %}
+            <div class="muted"><strong>Expected:</strong></div>
+            <ul class="muted">
+              {% for e in item["evidence_required"] %}
+                <li>{{ e["type"] }} — {{ e["name"] }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Context (inputs)</h2>
+  <div class="pre">{{ project["context"] | tojson(indent=2) }}</div>
+</body>
+</html>

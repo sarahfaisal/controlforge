@@ -1,0 +1,34 @@
+controls:
+  - id: DOC01
+    canonical_id: CTRL-SAF-0001
+    title: Maintain a System Card for the AI system
+    severity: medium
+    category: Documentation
+    objective: Capture intended use, capabilities, limitations, safety mitigations, and monitoring.
+    applicability:
+      any:
+        - exists: system.name
+    evidence_required:
+      - type: document
+        name: System Card (approved)
+    test_procedures:
+      - Confirm system card includes intended use, limitations, known failure modes, and escalation paths.
+    suggestions:
+      - type: template
+        id: template.system_card
+
+  - id: DOC02
+    canonical_id: CTRL-SAF-0002
+    title: Maintain a Dataset Sheet for key training/retrieval datasets
+    severity: medium
+    category: Documentation
+    objective: Document dataset sources, access, transformations, and risks.
+    applicability:
+      any:
+        - equals: [pattern.rag, true]
+        - equals: [model.fine_tuned, true]
+    evidence_required:
+      - type: document
+        name: Dataset Sheet(s)
+    test_procedures:
+      - Validate dataset sheets include provenance, consent/license checks, and retention.

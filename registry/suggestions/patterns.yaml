@@ -1,0 +1,39 @@
+patterns:
+  - id: pattern.prompt_boundaries
+    name: Prompt boundaries & system instruction isolation
+    description: Isolate system instructions, sanitize user input, and separate data from instructions.
+    guidance:
+      - Keep system prompts immutable and minimal.
+      - Treat all user and retrieved content as untrusted.
+      - Use structured tool-call schemas and output validation.
+
+  - id: pattern.tool_allowlist
+    name: Tool allowlisting + least privilege
+    description: Restrict tools, parameters, and execution contexts; require confirmation for high-impact actions.
+    guidance:
+      - Explicit allowlist of tools and callable operations.
+      - Constrain parameters and enforce authorization checks.
+      - Consider human-in-the-loop for irreversible actions.
+
+  - id: pattern.pii_phi_redaction
+    name: PII/PHI detection + redaction
+    description: Detect and redact sensitive identifiers in prompts, logs, and model outputs.
+    guidance:
+      - Redact before logging and before sending to third-party APIs.
+      - Maintain allowlists for permissible data fields.
+      - Validate outputs for accidental disclosure.
+
+  - id: pattern.rag_provenance
+    name: RAG provenance & ingestion controls
+    description: Ensure retrieval corpora are curated, access-controlled, and tamper-evident.
+    guidance:
+      - Require change review for corpus updates.
+      - Maintain provenance metadata and integrity checks.
+      - Segment corpora by sensitivity and audience.
+
+  - id: pattern.sbom_and_provenance
+    name: SBOM + model provenance tracking
+    description: Maintain inventory for model artifacts, dependencies, and vendor/API contracts.
+    guidance:
+      - Record model version, provider, and training/fine-tuning lineage if known.
+      - Track dependency versions and vulnerability posture.

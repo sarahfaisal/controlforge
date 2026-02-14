@@ -1,0 +1,13 @@
+pack:
+  id: eu-ai-act
+  name: EU AI Act (Obligation-Oriented Checklist Scaffold)
+  version: "2024-1689"
+  domain: governance
+  type: control_catalog
+  description: >
+    A scaffold pack translating EU AI Act risk-based obligations into auditable controls.
+    This is not a legal interpretation engine; tailor with counsel.
+  source:
+    name: European Union
+    reference: Regulation (EU) 2024/1689 (AI Act)
+    url: https://eur-lex.europa.eu/

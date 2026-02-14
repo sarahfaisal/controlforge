@@ -1,0 +1,15 @@
+templates:
+  - id: template.system_card
+    name: System Card Template
+    description: A starting point for documenting an AI system for audit and safety review.
+    fields:
+      - system_name
+      - intended_use
+      - users_and_stakeholders
+      - model_details
+      - data_sources
+      - limitations
+      - known_risks
+      - mitigations
+      - monitoring_and_incidents
+      - change_management
